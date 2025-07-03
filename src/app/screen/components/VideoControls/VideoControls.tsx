@@ -134,18 +134,17 @@ const VideoControls = (props: VideoControlsProps) => {
           <div className='progress-fill' ref={progress}></div>
         </div>
         <div className='controls-grid'>
+          <div className="video-time">
           <div className='time'>
             {realTime} / {totalDuration}
           </div>
-          <button onClick={playVideo} className='control-button'>
-            {isPaused ? <Play size={20} color='#ffffff' /> : <Pause size={20} color='#ffffff' />}
-          </button>
-          <button onClick={stopVideo} className='control-button'>
-            <Square size={20} color='#ffffff' />
-          </button>
-          <button onClick={muteVideo} className='control-button'>
+          <div className="volume">
+          <div className="mute-video">
+            <button onClick={muteVideo} className='control-button'>
             {isMuted ? <VolumeX size={20} color='#ffffff' /> : <Volume2 size={20} color='#ffffff' />}
-          </button>
+            </button>
+          </div>
+          <div className='volume-slider'>
           <input
             type='range'
             ref={volumeSlider}
@@ -156,9 +155,26 @@ const VideoControls = (props: VideoControlsProps) => {
             defaultValue={1}
             onChange={volumeChange}
           />
+          </div>
+          </div>
+          </div>
+          <div className="play-pause">
+            <div className="play ">
+          <button onClick={playVideo} className='control-button'>
+            {isPaused ? <Play size={20} color='#ffffff' /> : <Pause size={20} color='#ffffff' />}
+          </button>
+          </div>
+          <div className="pause">
+          <button onClick={stopVideo} className='control-button'>
+            <Square size={20} color='#ffffff' />
+          </button>
+          </div>
+          </div>
+          <div className="fullscreen">
           <button onClick={toggleFullscreen} className='control-button'>
             {isFullscreen ? <Minimize size={20} color='#ffffff' /> : <Maximize size={20} color='#ffffff' />}
           </button>
+          </div>
         </div>
       </div>
     </div>

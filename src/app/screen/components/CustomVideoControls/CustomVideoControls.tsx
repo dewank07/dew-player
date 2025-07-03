@@ -41,7 +41,7 @@ function CustomVideoControls(props: CustomVideoControlsProps) {
         if (!video) {
             setAmplifier(getAmplifier(setVideo));
         }
-    }, []);
+    }, [video, setVideo]);
 
     // volume control
     useEffect(() => {
@@ -145,7 +145,7 @@ function CustomVideoControls(props: CustomVideoControlsProps) {
         return () => {
             document.removeEventListener('keydown', playOrPause);
         };
-    }, [video]);
+    });
 
     if (showVolume && video) {
         return (
