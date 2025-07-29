@@ -1,6 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useRef } from "react";
-import { Maximize, Minimize, Play, Pause, Volume2, VolumeX, Square } from "lucide-react";
+import {
+  Maximize,
+  Minimize,
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  Square,
+} from "lucide-react";
 import { secondsToTime } from "../CustomVideoControls/time";
 import "./VideoControls.css";
 
@@ -123,57 +131,70 @@ const VideoControls = (props: VideoControlsProps) => {
 
   const scrub = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (!seek.current) return;
-    const seekPercentage = (e.nativeEvent.offsetX / seek.current.offsetWidth) * 100;
+    const seekPercentage =
+      (e.nativeEvent.offsetX / seek.current.offsetWidth) * 100;
     video.currentTime = (video.duration * seekPercentage) / 100;
   };
 
   return (
     <div>
-      <div className='controls hide' ref={controls}>
-        <div className='progress-bar' onClick={scrub} ref={seek}>
-          <div className='progress-fill' ref={progress}></div>
+      <div className="controls hide" ref={controls}>
+        <div className="progress-bar" onClick={scrub} ref={seek}>
+          <div className="progress-fill" ref={progress}></div>
         </div>
-        <div className='controls-grid'>
+        <div className="controls-grid">
           <div className="video-time">
-          <div className='time'>
-            {realTime} / {totalDuration}
-          </div>
-          <div className="volume">
-          <div className="mute-video">
-            <button onClick={muteVideo} className='control-button'>
-            {isMuted ? <VolumeX size={20} color='#ffffff' /> : <Volume2 size={20} color='#ffffff' />}
-            </button>
-          </div>
-          <div className='volume-slider'>
-          <input
-            type='range'
-            ref={volumeSlider}
-            className='volume'
-            min={0}
-            max={1}
-            step='0.1'
-            defaultValue={1}
-            onChange={volumeChange}
-          />
-          </div>
-          </div>
+            <div className="time">
+              {realTime} / {totalDuration}
+            </div>
+            <div className="volume">
+              <div className="volume-slider">
+                <input
+                  type="range"
+                  ref={volumeSlider}
+                  className="volume"
+                  min={0}
+                  max={1}
+                  step="0.1"
+                  defaultValue={1}
+                  onChange={volumeChange}
+                />
+              </div>
+              <div className="mute-video">
+                <button onClick={muteVideo} className="control-button">
+                  {isMuted ? (
+                    <VolumeX size={20} color="#ffffff" />
+                  ) : (
+                    <Volume2 size={20} color="#ffffff" />
+                  )}
+                </button>
+              </div>
+            </div>
           </div>
           <div className="play-pause">
             <div className="play ">
-          <button onClick={playVideo} className='control-button'>
-            {isPaused ? <Play size={20} color='#ffffff' /> : <Pause size={20} color='#ffffff' />}
-          </button>
-          </div>
-          <div className="pause">
-          <button onClick={stopVideo} className='control-button'>
-            <Square size={20} color='#ffffff' />
-          </button>
-          </div>
+              <button onClick={playVideo} className="control-button">
+                {isPaused ? (
+                  <Play size={20} color="#ffffff" />
+                ) : (
+                  <Pause size={20} color="#ffffff" />
+                )}
+              </button>
+            </div>
+            <div className="pause">
+              <button onClick={stopVideo} className="control-button">
+                <Square size={20} color="#ffffff" />
+              </button>
+            </div>
           </div>
           <div className="fullscreen">
-          <button onClick={toggleFullscreen} className='control-button'>
-            {isFullscreen ? <Minimize size={20} color='#ffffff' /> : <Maximize size={20} color='#ffffff' />}
-          </button>
+            <button onClick={toggleFullscreen} className="control-button">
+              {isFullscreen ? (
+                <Minimize size={20} color="#ffffff" />
+              ) : (
+                <Maximize size={20} color="#ffffff" />
+              )}
+            </button>
           </div>
         </div>
       </div>
