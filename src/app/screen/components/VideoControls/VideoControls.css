@@ -123,10 +123,10 @@
   justify-content: space-around;
   align-items: center;
   /* align-content: center; */
-  padding-right: 12vw;
+  /* padding-right: 12vw; */
 }
 .play {
-  padding-right: 5vw;
+  padding-right: 2vw;
 }
 .pause {
   padding-left: 2vw;

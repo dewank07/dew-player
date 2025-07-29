@@ -7,7 +7,7 @@ import {
   Pause,
   Volume2,
   VolumeX,
-  Square,
+  // Square,
 } from "lucide-react";
 import { secondsToTime } from "../CustomVideoControls/time";
 import "./VideoControls.css";
@@ -41,7 +41,7 @@ const VideoControls = (props: VideoControlsProps) => {
       video.pause();
     }
   };
-  const stopVideo = () => (video.currentTime = video.duration);
+  // const stopVideo = () => (video.currentTime = video.duration);
 
   useEffect(() => {
     video.addEventListener("loadedmetadata", () => {
@@ -145,6 +145,22 @@ const VideoControls = (props: VideoControlsProps) => {
         </div>
         <div className="controls-grid">
           <div className="video-time">
+            <div className="play-pause">
+              <div className="play ">
+                <button onClick={playVideo} className="control-button">
+                  {isPaused ? (
+                    <Play size={20} color="#ffffff" />
+                  ) : (
+                    <Pause size={20} color="#ffffff" />
+                  )}
+                </button>
+              </div>
+              {/* <div className="pause">
+              <button onClick={stopVideo} className="control-button">
+                <Square size={20} color="#ffffff" />
+              </button>
+            </div> */}
+            </div>
             <div className="time">
               {realTime} / {totalDuration}
             </div>
@@ -172,22 +188,7 @@ const VideoControls = (props: VideoControlsProps) => {
               </div>
             </div>
           </div>
-          <div className="play-pause">
-            <div className="play ">
-              <button onClick={playVideo} className="control-button">
-                {isPaused ? (
-                  <Play size={20} color="#ffffff" />
-                ) : (
-                  <Pause size={20} color="#ffffff" />
-                )}
-              </button>
-            </div>
-            <div className="pause">
-              <button onClick={stopVideo} className="control-button">
-                <Square size={20} color="#ffffff" />
-              </button>
-            </div>
-          </div>
+
           <div className="fullscreen">
             <button onClick={toggleFullscreen} className="control-button">
               {isFullscreen ? (
