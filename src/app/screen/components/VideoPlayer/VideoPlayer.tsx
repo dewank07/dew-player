@@ -32,7 +32,7 @@ function VideoPlayer(props: VideoPlayerProps) {
       track.src = subtitleSrc;
       track.default = true;
       video.src = videoSrc;
-      video.muted = true;
+      // video.muted = true;
       video.autoplay = true;
       video.appendChild(track);
     }

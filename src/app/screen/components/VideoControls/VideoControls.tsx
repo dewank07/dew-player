@@ -51,6 +51,7 @@ const VideoControls = (props: VideoControlsProps) => {
       }
       setTotalDuration(secondsToTime(video.duration));
     });
+
     video.addEventListener("timeupdate", () => {
       if (!progress.current) return;
       setRealTime(secondsToTime(video.currentTime));
@@ -76,7 +77,7 @@ const VideoControls = (props: VideoControlsProps) => {
       if (timeoutHandle) {
         clearTimeout(timeoutHandle);
       }
-      timeoutHandle = window.setTimeout(hideControls, 10000);
+      timeoutHandle = window.setTimeout(hideControls, 1000);
     });
   }, [video, videoContainer]);
 
