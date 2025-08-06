@@ -14,7 +14,7 @@ const Screen = () => {
   const { selectedVideo, setSelectedVideo } = useVideoContext();
   const { videoUrl, videoName, subtitleSrc } = selectedVideo;
   const router = useRouter();
-
+ 
   const { videoFile, subtitleFile, validateFiles,} = useUpload();
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Screen = () => {
           <div className='App-icon'>
             <PlayCircle size={30} />
           </div>
-          <span className='App-name m-1 font-bold px-2 text-xl '>Simple Video Player</span>
+          <span className='App-name m-1 font-bold px-2 text-xl '> Dew Video Player</span>
         </div>
         {/* <Github className='cursor-pointer' size={24} /> */}
       </header>

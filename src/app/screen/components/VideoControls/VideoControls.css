@@ -80,7 +80,8 @@
   display: block;
 }
 .volume-slider input[type="range"] {
-  writing-mode: bt-lr;
+  writing-mode: vertical-lr;
+  direction: rtl;
   width: 3px;
   height: 100px;
   transform: rotate(180deg);
@@ -131,10 +132,21 @@
 .pause {
   padding-left: 2vw;
 }
-.fullscreen {
+.subtitleBtn{
+  border: 2px solid white;
+  padding: 0 1px;
+  font-size: 11px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+.setting{
+  margin-left: 5px;
+}
+.right-track {
   display: grid;
-  grid-template-columns: 1fr repeat(1, 1fr);
-  margin-right: 10px;
+  gap: 10px;
+  grid-template-columns: 1fr repeat(2, 1fr);
+  margin-right: 15px;
 }
 input[type="range"] {
   -webkit-appearance: none;

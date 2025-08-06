@@ -7,6 +7,9 @@ import {
   Pause,
   Volume2,
   VolumeX,
+  Settings,
+  Captions,
+  CaptionsOffIcon,
   // Square,
 } from "lucide-react";
 import { secondsToTime } from "../CustomVideoControls/time";
@@ -28,11 +31,26 @@ const VideoControls = (props: VideoControlsProps) => {
   const [totalDuration, setTotalDuration] = useState(secondsToTime(0));
   const [realTime, setRealTime] = useState(secondsToTime(0));
 
+  // Subtitle on/off logic
+  const [isSubtitle, setIsSubtitle] = useState(true);
+
   const progress = useRef<HTMLDivElement>(null);
   const volumeSlider = useRef<HTMLInputElement>(null);
   const seek = useRef<HTMLDivElement>(null);
   const controls = useRef<HTMLDivElement>(null);
   const videoStorageKey = `vid--name--${videoName}`;
+
+  //  logic for caption/subtitle button
+  const toggleSubtitle = () => {
+    setIsSubtitle(!isSubtitle);
+  };
+
+  useEffect(() => {
+    if (video?.textTracks?.length > 0) {
+      const track = video.textTracks[0];
+      track.mode = isSubtitle ? "showing" : "disabled";
+    }
+  }, [isSubtitle]);
 
   const playVideo = () => {
     if (video.paused) {
@@ -77,7 +95,7 @@ const VideoControls = (props: VideoControlsProps) => {
       if (timeoutHandle) {
         clearTimeout(timeoutHandle);
       }
-      timeoutHandle = window.setTimeout(hideControls, 1000);
+      timeoutHandle = window.setTimeout(hideControls, 5000);
     });
   }, [video, videoContainer]);
 
@@ -189,7 +207,17 @@ const VideoControls = (props: VideoControlsProps) => {
             </div>
           </div>
 
-          <div className="fullscreen">
+          <div className="right-track">
+            <button className="subtitleBtn" onClick={toggleSubtitle}>
+              {isSubtitle ? (
+                <Captions size={20} color="#ffffff" />
+              ) : (
+                <CaptionsOffIcon size={20} color="#ffffff" />
+              )}
+            </button>
+            <button className="setting">
+              <Settings size={20} color="#ffffff" />
+            </button>
             <button onClick={toggleFullscreen} className="control-button">
               {isFullscreen ? (
                 <Minimize size={20} color="#ffffff" />
