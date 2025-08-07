@@ -96,6 +96,13 @@
   background-color: pink;
   transition: all 0.1s;
 }
+.forward-backward{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 2vw;
+}
 
 .click {
   cursor: pointer;
@@ -127,11 +134,11 @@
   /* padding-right: 12vw; */
 }
 .play {
-  padding-right: 2vw;
+  padding: 0 2vw;
 }
-.pause {
+/* .pause {
   padding-left: 2vw;
-}
+} */
 .subtitleBtn{
   border: 2px solid white;
   padding: 0 1px;

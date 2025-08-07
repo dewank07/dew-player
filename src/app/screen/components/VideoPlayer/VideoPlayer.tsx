@@ -37,7 +37,6 @@ function VideoPlayer(props: VideoPlayerProps) {
       track.default = true;
       video.src = videoSrc;
       video.playbackRate = 1
-      video.requestPictureInPicture()
       video.loop = true
       // video.muted = true;
       track.addEventListener("load", () => {

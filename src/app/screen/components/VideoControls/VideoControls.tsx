@@ -11,6 +11,8 @@ import {
   Captions,
   CaptionsOffIcon,
   PictureInPicture,
+  SkipForwardIcon,
+  SkipBackIcon,
   // Square,
 } from "lucide-react";
 import { secondsToTime } from "../CustomVideoControls/time";
@@ -137,15 +139,23 @@ const VideoControls = (props: VideoControlsProps) => {
     setIsMuted(video.volume === 0);
   };
 
-function requestPictureInPicture() {
-  if (document.pictureInPictureEnabled) {
-    video.requestPictureInPicture();
-  } else {
-    console.log("Your browser cannot use picture-in-picture right now");
+  // picture-in-picture feature
+  function requestPictureInPicture() {
+    if (document.pictureInPictureEnabled) {
+      video.requestPictureInPicture();
+    } else {
+      console.log("Your browser cannot use picture-in-picture right now");
+    }
   }
-}
 
+  // skip 5 sec forward or backward
+  const skipForward = () => {
+    video.currentTime = Math.min(video.duration, video.currentTime + 5);
+  };
 
+  const skipBackward = () => {
+    video.currentTime = Math.max(0, video.currentTime - 5);
+  };
 
   const toggleFullscreen = () => {
     if (!controls.current) return;
@@ -174,21 +184,30 @@ function requestPictureInPicture() {
         </div>
         <div className="controls-grid">
           <div className="video-time">
-            <div className="play-pause">
-              <div className="play ">
-                <button onClick={playVideo} className="control-button">
-                  {isPaused ? (
-                    <Play size={20} color="#ffffff" />
-                  ) : (
-                    <Pause size={20} color="#ffffff" />
-                  )}
-                </button>
-              </div>
-              {/* <div className="pause">
+            <div className="forward-backward">
+               <button className="backward" onClick={skipBackward}>
+                <SkipBackIcon size={20} color="#ffffff" />
+              </button>
+             
+              <div className="play-pause">
+                <div className="play ">
+                  <button onClick={playVideo} className="control-button">
+                    {isPaused ? (
+                      <Play size={20} color="#ffffff" />
+                    ) : (
+                      <Pause size={20} color="#ffffff" />
+                    )}
+                  </button>
+                </div>
+                {/* <div className="pause">
               <button onClick={stopVideo} className="control-button">
                 <Square size={20} color="#ffffff" />
               </button>
             </div> */}
+              </div>
+              <button className="forward" onClick={skipForward}>
+                <SkipForwardIcon size={20} color="#ffffff" />
+              </button>
             </div>
             <div className="time">
               {realTime} / {totalDuration}
