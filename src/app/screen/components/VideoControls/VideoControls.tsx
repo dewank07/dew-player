@@ -157,15 +157,18 @@ const VideoControls = (props: VideoControlsProps) => {
     video.currentTime = Math.max(0, video.currentTime - 5);
   };
 
+  // full screen on clicking "F" button logic
   const toggleFullscreen = () => {
-    if (!controls.current) return;
-    if (document.fullscreenElement === null) {
-      videoContainer.requestFullscreen();
-      controls.current.style.top = "90%";
-    } else {
-      document.exitFullscreen();
-      controls.current.style.top = "";
-    }
+    document.addEventListener("keydown", (e) => {
+      if (!controls.current) return;
+      if (document.fullscreenElement === null || e.code === "KeyF") {
+        videoContainer.requestFullscreen();
+        controls.current.style.top = "90%";
+      } else {
+        document.exitFullscreen();
+        controls.current.style.top = "";
+      }
+    })
     setIsFullscreen(!isFullscreen);
   };
 
