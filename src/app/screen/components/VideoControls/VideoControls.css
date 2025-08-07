@@ -145,7 +145,7 @@
 .right-track {
   display: grid;
   gap: 10px;
-  grid-template-columns: 1fr repeat(2, 1fr);
+  grid-template-columns: 1fr repeat(3, 1fr);
   margin-right: 15px;
 }
 input[type="range"] {

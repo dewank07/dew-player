@@ -10,6 +10,7 @@ import {
   Settings,
   Captions,
   CaptionsOffIcon,
+  PictureInPicture,
   // Square,
 } from "lucide-react";
 import { secondsToTime } from "../CustomVideoControls/time";
@@ -136,6 +137,16 @@ const VideoControls = (props: VideoControlsProps) => {
     setIsMuted(video.volume === 0);
   };
 
+function requestPictureInPicture() {
+  if (document.pictureInPictureEnabled) {
+    video.requestPictureInPicture();
+  } else {
+    console.log("Your browser cannot use picture-in-picture right now");
+  }
+}
+
+
+
   const toggleFullscreen = () => {
     if (!controls.current) return;
     if (document.fullscreenElement === null) {
@@ -214,6 +225,9 @@ const VideoControls = (props: VideoControlsProps) => {
               ) : (
                 <CaptionsOffIcon size={20} color="#ffffff" />
               )}
+            </button>
+            <button className="pip" onClick={requestPictureInPicture}>
+              <PictureInPicture size={20} color="#ffffff" />
             </button>
             <button className="setting">
               <Settings size={20} color="#ffffff" />
