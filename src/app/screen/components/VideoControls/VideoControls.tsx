@@ -7,16 +7,17 @@ import {
   Pause,
   Volume2,
   VolumeX,
-  Settings,
   Captions,
   CaptionsOffIcon,
   PictureInPicture,
   SkipForwardIcon,
   SkipBackIcon,
+  TimerIcon,
   // Square,
 } from "lucide-react";
 import { secondsToTime } from "../CustomVideoControls/time";
 import "./VideoControls.css";
+import SpeedSettings from "./SpeedSettings";
 
 type VideoControlsProps = {
   video: HTMLVideoElement;
@@ -36,6 +37,9 @@ const VideoControls = (props: VideoControlsProps) => {
 
   // Subtitle on/off logic
   const [isSubtitle, setIsSubtitle] = useState(true);
+  // Setting div menu show/hide logic
+  const [showMenu, setShowMenu] = useState(false);
+  const [speed, setSpeed] = useState(1);
 
   const progress = useRef<HTMLDivElement>(null);
   const volumeSlider = useRef<HTMLInputElement>(null);
@@ -47,6 +51,22 @@ const VideoControls = (props: VideoControlsProps) => {
   const toggleSubtitle = () => {
     setIsSubtitle(!isSubtitle);
   };
+
+  //  logic for "setting" button
+  const toggleSetting = () => {
+    setShowMenu((prev) => !prev);
+    console.log(showMenu);
+  };
+
+  // speed options in setting
+  const handleSpeed = (newSpeed: number) => {
+    setSpeed(newSpeed);
+    if (video) {
+      video.playbackRate = newSpeed;
+    }
+  };
+
+  // console.log("videoObject.playbackRate",video.playbackRate);
 
   useEffect(() => {
     if (video?.textTracks?.length > 0) {
@@ -168,7 +188,7 @@ const VideoControls = (props: VideoControlsProps) => {
         document.exitFullscreen();
         controls.current.style.top = "";
       }
-    })
+    });
     setIsFullscreen(!isFullscreen);
   };
 
@@ -187,11 +207,11 @@ const VideoControls = (props: VideoControlsProps) => {
         </div>
         <div className="controls-grid">
           <div className="video-time">
-            <div className="forward-backward">
-               <button className="backward" onClick={skipBackward}>
+            <div className="left-track">
+              <button className="backward" onClick={skipBackward}>
                 <SkipBackIcon size={20} color="#ffffff" />
               </button>
-             
+
               <div className="play-pause">
                 <div className="play ">
                   <button onClick={playVideo} className="control-button">
@@ -251,9 +271,14 @@ const VideoControls = (props: VideoControlsProps) => {
             <button className="pip" onClick={requestPictureInPicture}>
               <PictureInPicture size={20} color="#ffffff" />
             </button>
-            <button className="setting">
-              <Settings size={20} color="#ffffff" />
+            <button onClick={toggleSetting} className="setting">
+              <TimerIcon size={20} color="#ffffff" />
             </button>
+            <SpeedSettings
+              handleSpeed={handleSpeed}
+              speed={speed}
+              showMenu={showMenu}
+            />
             <button onClick={toggleFullscreen} className="control-button">
               {isFullscreen ? (
                 <Minimize size={20} color="#ffffff" />
