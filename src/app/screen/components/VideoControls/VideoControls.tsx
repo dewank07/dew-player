@@ -179,18 +179,35 @@ const VideoControls = (props: VideoControlsProps) => {
 
   // full screen on clicking "F" button logic
   const toggleFullscreen = () => {
-    document.addEventListener("keydown", (e) => {
-      if (!controls.current) return;
-      if (document.fullscreenElement === null || e.code === "KeyF") {
+      // if (!controls.current) return;
+      if (document.fullscreenElement === null ) {
         videoContainer.requestFullscreen();
-        controls.current.style.top = "90%";
+        // controls.current.style.top = "90%";
       } else {
         document.exitFullscreen();
-        controls.current.style.top = "";
+        // controls.current.style.top = "";
       }
-    });
     setIsFullscreen(!isFullscreen);
   };
+
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+       if (!controls.current) return;
+       if (e.key.toLowerCase() === "f") {
+         if (document.fullscreenElement === null ) {
+           videoContainer.requestFullscreen();
+           controls.current.style.top = "90%";
+          } else {
+            document.exitFullscreen();
+            controls.current.style.top = "";
+          }
+        }
+    };
+    setIsFullscreen(!isFullscreen); 
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);    
+    }, []);
 
   const scrub = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (!seek.current) return;
